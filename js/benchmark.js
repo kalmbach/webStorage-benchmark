@@ -26,11 +26,17 @@ function webSqlBenchmark() {
 
     if (webStorage.isValid) {
       webStorage.set(key, value, function(e) {
-        if (e == null) {
+        if (e !== null) {
+          alert("set: " + e.message + "(" + e.code +")");
+        } else {
           webStorage.get(key, function(e) {
-            if (e == null) {
+            if (e !== null) {
+              alert("set: " + e.message + "(" + e.code +")");
+            } else {
               webStorage.remove(key, function(e) {
-                if(e == null) {
+                if (e !== null) {
+                  alert("set: " + e.message + "(" + e.code +")");
+                } else {
                   i++;
 
                   var progress_label;
@@ -56,8 +62,8 @@ function webSqlBenchmark() {
         }
       });
     } else {
-      timespan.textContect = "Web Sql Storage is not available in this browser."
-      setTimeout(localStoragBenchmark, 1000);
+      timespan.textContent = "Web Sql Storage is not available in this browser."
+      setTimeout(localStorageBenchmark, 1000);
     }
   };
 
