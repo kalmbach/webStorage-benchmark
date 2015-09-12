@@ -24,36 +24,41 @@ function webSqlBenchmark() {
                  neque blandit, vel tempor elit lobortis. Vivamus suscipit risus\
                  est, in molestie nunc egestas et. Integer faucibus turpis sed nullam";
 
-    webStorage.set(key, value, function(e) {
-      if (e == null) {
-        webStorage.get(key, function(e) {
-          if (e == null) {
-            webStorage.remove(key, function(e) {
-              if(e == null) {
-                i++;
+    if (webStorage.isValid) {
+      webStorage.set(key, value, function(e) {
+        if (e == null) {
+          webStorage.get(key, function(e) {
+            if (e == null) {
+              webStorage.remove(key, function(e) {
+                if(e == null) {
+                  i++;
 
-                var progress_label;
-                var totalTime = (new Date()) - startTime;
-                var averageTime = Math.round(totalTime / i * 100) / 100;
+                  var progress_label;
+                  var totalTime = (new Date()) - startTime;
+                  var averageTime = Math.round(totalTime / i * 100) / 100;
 
-                progress_label = "Operations: " + i;
-                progress_label += ", Total Time: " + totalTime + "ms";
-                progress_label += ", Average Time: " + averageTime + "ms";
+                  progress_label = "Operations: " + i;
+                  progress_label += ", Total Time: " + totalTime + "ms";
+                  progress_label += ", Average Time: " + averageTime + "ms";
 
-                pgbar.setAttribute('data-progrecss', i * 2);
-                timespan.textContent = progress_label;
+                  pgbar.setAttribute('data-progrecss', i * 2);
+                  timespan.textContent = progress_label;
 
-                if(i < 50) {
-                  r();
-                } else {
-                  setTimeout(localStorageBenchmark, 1000);
+                  if(i < 50) {
+                    r();
+                  } else {
+                    setTimeout(localStorageBenchmark, 1000);
+                  }
                 }
-              }
-            });
-          }
-        });
-      }
-    });
+              });
+            }
+          });
+        }
+      });
+    } else {
+      timespan.textContect = "Web Sql Storage is not available in this browser."
+      setTimeout(localStoragBenchmark, 1000);
+    }
   };
 
   r();
