@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/progrecss.css" />
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet" type="text/css"/>
+
+  <script src="js/webStorage.js"></script>
+  <script src="js/localStorageAdapter.js"></script>
+  <title>benchmark</title>
+</head>
+<body class="newUser">
+<section id="main">
+  <div>
+    <h1>Benchmark</h1>
+    <p>A simple benchmark to compare webStorage Adapters</p>
+  </div>
+</section>
+<section id="benchmark">
+  <p>An operation consists in setting, getting and removing a (key,value) pair.
+  <br />50 operations will be performed with each adapter.
+  </p>
+  <div>
+    <h3>Web Sql Adapter</h3><span id="websql-time-span"></span>
+    <div id="websql-benchmark-pgbar" class="progrecss" data-progrecss="0"></div>
+  </div>
+</section>
+<section id="benchmark">
+  <div>
+    <h3>localStorage Adapter</h3><span id="localstorage-time-span"></span>
+    <div id="localstorage-benchmark-pgbar" class="progrecss" data-progrecss="0"></div>
+  </div>
+</section>
+<section id="benchmark">
+  <div>
+    <h3>localStorage Adapter</h3>
+    <div id="local-benchmark-pgbar" class="progrecss" data-progrecss="0"></div>
+  </div>
+</section>
+<script src="js/benchmark.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+@import url(normalize.css);
+
+html, body {
+  height: 100%; }
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  color: #5b5b5f;
+  display: flex;
+  display: -webkit-flex;
+  -moz-display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+  -webkit-flex-flow: row wrap;
+  -webkit-justify-content: flex-start;
+  -webkit-align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -moz-flex-flow: row wrap;
+  -moz-justify-content: flex-start;
+  -moz-align-content: flex-start;
+  -moz-align-items: flex-start;
+}
+
+#main {
+  display: flex;
+  display: -webkit-flex;
+  -moz-display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  -webkit-flex-flow: column wrap;
+  -webkit-justify-content: center;
+  -webkit-align-content: center;
+  -webkit-align-items: center;
+  -moz-flex-flow: column wrap;
+  -moz-justify-content: center;
+  -moz-align-content: center;
+  -moz-align-items: center;
+  width: 100%;
+  height: 25%;
+  text-align: center;
+  position: relative;
+}
+
+#main h1, #main h2 {
+  color: #404246;
+}
+
+#main p {
+  margin-bottom: 3em;
+}
+
+#benchmark {
+  padding: 10px 5% 10px 5%;
+  width: 100%;
+}
