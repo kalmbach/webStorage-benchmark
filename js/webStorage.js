@@ -11,7 +11,6 @@ var webStorage = (function() {
     return function(error) {
       if (typeof(callback) === "function") {
         callback(error);
-        return false;
       }
     };
   }
@@ -22,7 +21,7 @@ var webStorage = (function() {
 
       if (typeof(callback) === "function") {
         if (results.rows.length > 0) {
-          data = JSON.parse(results.rows[0].value);
+          data = JSON.parse(results.rows.item(0).value);
         }
 
         callback(null, data);
@@ -70,7 +69,7 @@ var webStorage = (function() {
 
           t.executeSql(delete_query, [key], function(e, r) {
             t.executeSql(insert_query, [key, data], self.okHandler(callback));
-          }, function(e) { alert(e.message); });
+          });
         },
         this.errorHandler(callback)
       );
@@ -97,18 +96,20 @@ var webStorage = (function() {
 
     if (!window.openDatabase) {
       this.isValid = false;
+      Object.freeze(this);
     } else {
       this.db = openDatabase('_webStorage', '1.0', 'Web Storage', 2 * 1024 * 1024);
       this.db.transaction(
         function(t) {
-          t.executeSql("CREATE TABLE IF NOT EXISTS store(key TEXT, value TEXT)");
+          t.executeSql("CREATE TABLE IF NOT EXISTS store(key STRING, value TEXT)");
         },
         function(e) {
           self.isValid = false;
-          return false;
+          Object.freeze(self);
         },
         function() {
           self.isValid = true;
+          Object.freeze(self);
         }
       );
     }
