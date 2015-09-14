@@ -102,7 +102,11 @@ function localStorageBenchmark() {
                 pgbar.setAttribute('data-progrecss', i * 2);
                 timespan.textContent = progress_label;
 
-                if(i < 50) { r(); }
+                if(i < 50) {
+                  r();
+                } else {
+                  setTimeout(indexedDBBenchmark, 1000);
+                }
               }
             });
           }
@@ -114,5 +118,48 @@ function localStorageBenchmark() {
   r();
 }
 
+function indexedDBBenchmark() {
+  var pgbar = document.querySelector('#indexeddb-benchmark-pgbar');
+  var timespan = document.querySelector('#indexeddb-time-span');
+  var startTime = new Date();
+  var i = 0;
+
+  function r() {
+    var key = uuid();
+    var value = "Donec fringilla lacinia nisl eget sollicitudin. Ut sit amet\
+                 consectetur lorem, et facilisis neque. Ut malesuada felis sed\
+                 neque blandit, vel tempor elit lobortis. Vivamus suscipit risus\
+                 est, in molestie nunc egestas et. Integer faucibus turpis sed nullam";
+
+    indexedDBAdapter.set(key, value, function(e) {
+      if (e == null) {
+        indexedDBAdapter.get(key, function(e) {
+          if (e == null) {
+            indexedDBAdapter.remove(key, function(e) {
+              if(e == null) {
+                i++;
+
+                var progress_label;
+                var totalTime = (new Date()) - startTime;
+                var averageTime = Math.round(totalTime / i * 100) / 100;
+
+                progress_label = "Operations: " + i;
+                progress_label += ", Total Time: " + totalTime + "ms";
+                progress_label += ", Average Time: " + averageTime + "ms";
+
+                pgbar.setAttribute('data-progrecss', i * 2);
+                timespan.textContent = progress_label;
+
+                if(i < 50) { r(); }
+              }
+            });
+          }
+        });
+      }
+    });
+  };
+
+  r();
+}
 
 setTimeout(webSqlBenchmark, 1000);
