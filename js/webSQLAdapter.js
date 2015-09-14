@@ -1,6 +1,6 @@
 "use strict";
 
-var webStorage = (function() {
+var webSQLAdapter = (function() {
   var publicAPI = {};
 
   publicAPI.db = undefined;
@@ -94,10 +94,7 @@ var webStorage = (function() {
     var self = this;
     this.db = undefined;
 
-    if (!window.openDatabase) {
-      this.isValid = false;
-      Object.freeze(this);
-    } else {
+    if ('openDatabase' in window && window.openDatabase !== undefined) {
       this.db = openDatabase('_webStorage', '1.0', 'Web Storage', 2 * 1024 * 1024);
       this.db.transaction(
         function(t) {
@@ -105,13 +102,13 @@ var webStorage = (function() {
         },
         function(e) {
           self.isValid = false;
-          Object.freeze(self);
         },
         function() {
           self.isValid = true;
-          Object.freeze(self);
         }
       );
+    } else {
+      this.isValid = false;
     }
   }
 

@@ -24,16 +24,16 @@ function webSqlBenchmark() {
                  neque blandit, vel tempor elit lobortis. Vivamus suscipit risus\
                  est, in molestie nunc egestas et. Integer faucibus turpis sed nullam";
 
-    if (webStorage.isValid) {
-      webStorage.set(key, value, function(e) {
+    if (webSQLAdapter.isValid) {
+      webSQLAdapter.set(key, value, function(e) {
         if (e !== null) {
           alert("set: " + e.message + "(" + e.code +")");
         } else {
-          webStorage.get(key, function(e) {
+          webSQLAdapter.get(key, function(e) {
             if (e !== null) {
               alert("set: " + e.message + "(" + e.code +")");
             } else {
-              webStorage.remove(key, function(e) {
+              webSQLAdapter.remove(key, function(e) {
                 if (e !== null) {
                   alert("set: " + e.message + "(" + e.code +")");
                 } else {
