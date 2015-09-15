@@ -1,6 +1,6 @@
 "use strict";
 
-var webStorage = (function() {
+var webSQLAdapter = (function() {
   var publicAPI = {};
 
   publicAPI.db = undefined;
@@ -21,7 +21,7 @@ var webStorage = (function() {
 
       if (typeof(callback) === "function") {
         if (results.rows.length > 0) {
-          data = JSON.parse(results.rows[0].value);
+          data = JSON.parse(results.rows.item(0).value);
         }
 
         callback(null, data);
@@ -67,8 +67,9 @@ var webStorage = (function() {
           var insert_query = "INSERT INTO " + self.tableName + "(key,value) VALUES(?,?);";
           var data = JSON.stringify(value);
 
-          t.executeSql(delete_query, [key]);
-          t.executeSql(insert_query, [key, data], self.okHandler(callback));
+          t.executeSql(delete_query, [key], function(e, r) {
+            t.executeSql(insert_query, [key, data], self.okHandler(callback));
+          });
         },
         this.errorHandler(callback)
       );
@@ -93,10 +94,7 @@ var webStorage = (function() {
     var self = this;
     this.db = undefined;
 
-    if (!window.openDatabase) {
-      this.isValid = false;
-      Object.freeze(this);
-    } else {
+    if ('openDatabase' in window && window.openDatabase !== undefined) {
       this.db = openDatabase('_webStorage', '1.0', 'Web Storage', 2 * 1024 * 1024);
       this.db.transaction(
         function(t) {
@@ -104,13 +102,13 @@ var webStorage = (function() {
         },
         function(e) {
           self.isValid = false;
-          Object.freeze(self);
         },
         function() {
           self.isValid = true;
-          Object.freeze(self);
         }
       );
+    } else {
+      this.isValid = false;
     }
   }
 

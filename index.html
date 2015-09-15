@@ -7,9 +7,10 @@
   <link rel="stylesheet" type="text/css" href="css/progrecss.css" />
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet" type="text/css"/>
 
-  <script src="js/webStorage.js"></script>
+  <script src="js/webSQLAdapter.js"></script>
   <script src="js/localStorageAdapter.js"></script>
-  <title>benchmark</title>
+  <script src="js/indexedDBAdapter.js"></script>
+  <title>webStorage Adapters Benchmark</title>
 </head>
 <body class="newUser">
 <section id="main">
@@ -23,7 +24,7 @@
   <br />50 operations will be performed with each adapter.
   </p>
   <div>
-    <h3>Web Sql Adapter</h3><span id="websql-time-span"></span>
+    <h3>WebSQL Adapter</h3><span id="websql-time-span"></span>
     <div id="websql-benchmark-pgbar" class="progrecss" data-progrecss="0"></div>
   </div>
 </section>
@@ -35,8 +36,8 @@
 </section>
 <section id="benchmark">
   <div>
-    <h3>localStorage Adapter</h3>
-    <div id="local-benchmark-pgbar" class="progrecss" data-progrecss="0"></div>
+    <h3>IndexedDB Adapter</h3><span id="indexeddb-time-span"></span>
+    <div id="indexeddb-benchmark-pgbar" class="progrecss" data-progrecss="0"></div>
   </div>
 </section>
 <script src="js/benchmark.js"></script>
