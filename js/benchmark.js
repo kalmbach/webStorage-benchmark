@@ -115,7 +115,7 @@ function localStorageBenchmark() {
         }
       });
     } else {
-      timespan.textContent = "Web Sql Storage is not available in this browser."
+      timespan.textContent = "localStorage is not available in this browser."
       setTimeout(indexedDBBenchmark, 1000);
     }
 
@@ -165,7 +165,7 @@ function indexedDBBenchmark() {
         }
       });
     } else {
-      timespan.textContent = "Web Sql Storage is not available in this browser."
+      timespan.textContent = "IndexedDB Storage is not available in this browser."
     }
   };
 
