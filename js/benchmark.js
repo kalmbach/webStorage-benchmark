@@ -83,36 +83,42 @@ function localStorageBenchmark() {
                  neque blandit, vel tempor elit lobortis. Vivamus suscipit risus\
                  est, in molestie nunc egestas et. Integer faucibus turpis sed nullam";
 
-    localStorageAdapter.set(key, value, function(e) {
-      if (e == null) {
-        localStorageAdapter.get(key, function(e) {
-          if (e == null) {
-            localStorageAdapter.remove(key, function(e) {
-              if(e == null) {
-                i++;
+    if (localStorageAdapter.isValid) {
+      localStorageAdapter.set(key, value, function(e) {
+        if (e == null) {
+          localStorageAdapter.get(key, function(e) {
+            if (e == null) {
+              localStorageAdapter.remove(key, function(e) {
+                if(e == null) {
+                  i++;
 
-                var progress_label;
-                var totalTime = (new Date()) - startTime;
-                var averageTime = Math.round(totalTime / i * 100) / 100;
+                  var progress_label;
+                  var totalTime = (new Date()) - startTime;
+                  var averageTime = Math.round(totalTime / i * 100) / 100;
 
-                progress_label = "Operations: " + i;
-                progress_label += ", Total Time: " + totalTime + "ms";
-                progress_label += ", Average Time: " + averageTime + "ms";
+                  progress_label = "Operations: " + i;
+                  progress_label += ", Total Time: " + totalTime + "ms";
+                  progress_label += ", Average Time: " + averageTime + "ms";
 
-                pgbar.setAttribute('data-progrecss', i * 2);
-                timespan.textContent = progress_label;
+                  pgbar.setAttribute('data-progrecss', i * 2);
+                  timespan.textContent = progress_label;
 
-                if(i < 50) {
-                  r();
-                } else {
-                  setTimeout(indexedDBBenchmark, 1000);
+                  if(i < 50) {
+                    r();
+                  } else {
+                    setTimeout(indexedDBBenchmark, 1000);
+                  }
                 }
-              }
-            });
-          }
-        });
-      }
-    });
+              });
+            }
+          });
+        }
+      });
+    } else {
+      timespan.textContent = "Web Sql Storage is not available in this browser."
+      setTimeout(indexedDBBenchmark, 1000);
+    }
+
   };
 
   r();
@@ -131,32 +137,36 @@ function indexedDBBenchmark() {
                  neque blandit, vel tempor elit lobortis. Vivamus suscipit risus\
                  est, in molestie nunc egestas et. Integer faucibus turpis sed nullam";
 
-    indexedDBAdapter.set(key, value, function(e) {
-      if (e == null) {
-        indexedDBAdapter.get(key, function(e) {
-          if (e == null) {
-            indexedDBAdapter.remove(key, function(e) {
-              if(e == null) {
-                i++;
+    if (indexedDBAdapter.isValid) {
+      indexedDBAdapter.set(key, value, function(e) {
+        if (e == null) {
+          indexedDBAdapter.get(key, function(e) {
+            if (e == null) {
+              indexedDBAdapter.remove(key, function(e) {
+                if(e == null) {
+                  i++;
 
-                var progress_label;
-                var totalTime = (new Date()) - startTime;
-                var averageTime = Math.round(totalTime / i * 100) / 100;
+                  var progress_label;
+                  var totalTime = (new Date()) - startTime;
+                  var averageTime = Math.round(totalTime / i * 100) / 100;
 
-                progress_label = "Operations: " + i;
-                progress_label += ", Total Time: " + totalTime + "ms";
-                progress_label += ", Average Time: " + averageTime + "ms";
+                  progress_label = "Operations: " + i;
+                  progress_label += ", Total Time: " + totalTime + "ms";
+                  progress_label += ", Average Time: " + averageTime + "ms";
 
-                pgbar.setAttribute('data-progrecss', i * 2);
-                timespan.textContent = progress_label;
+                  pgbar.setAttribute('data-progrecss', i * 2);
+                  timespan.textContent = progress_label;
 
-                if(i < 50) { r(); }
-              }
-            });
-          }
-        });
-      }
-    });
+                  if(i < 50) { r(); }
+                }
+              });
+            }
+          });
+        }
+      });
+    } else {
+      timespan.textContent = "Web Sql Storage is not available in this browser."
+    }
   };
 
   r();
